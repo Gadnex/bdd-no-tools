@@ -4,7 +4,6 @@ import bdd.driver.sprint.SprintDriver;
 import java.time.LocalDate;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
  * sprint.
  */
 @DisplayName("Create a sprint")
-@Disabled
 class CreateSprintTest {
 
   private SprintDsl scrumMaster;
@@ -37,7 +35,11 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .theSprintIsCreated("Sprint 1", LocalDate.of(2025, 8, 4), LocalDate.of(2025, 8, 15));
+        .theSprintIsCreated(
+            UUID.fromString("7e1f20a5-3aaf-45e0-a04c-a94ab3a85442"),
+            "Sprint 1",
+            LocalDate.of(2025, 8, 4),
+            LocalDate.of(2025, 8, 15));
   }
 
   @Test
@@ -50,6 +52,7 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .theSprintIsCreated("Sprint no dates", null, null);
+        .theSprintIsCreated(
+            UUID.fromString("374f7929-bd6b-4178-88f2-c273aa48134c"), "Sprint no dates", null, null);
   }
 }
