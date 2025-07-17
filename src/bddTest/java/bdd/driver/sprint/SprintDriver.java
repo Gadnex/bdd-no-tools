@@ -81,8 +81,7 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
-  public SprintDsl theSprintIsCreated(
-      UUID productId, String sprintName, LocalDate startDate, LocalDate endDate) {
+  public SprintDsl theSprintIsCreated() {
     // Verify sprintCreatedEvent
     assertNotNull(sprintCreatedEvent);
     assertNotNull(sprintCreatedEvent.id());

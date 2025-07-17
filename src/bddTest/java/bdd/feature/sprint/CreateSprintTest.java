@@ -35,11 +35,7 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .theSprintIsCreated(
-            UUID.fromString("7e1f20a5-3aaf-45e0-a04c-a94ab3a85442"),
-            "Sprint 1",
-            LocalDate.of(2025, 8, 4),
-            LocalDate.of(2025, 8, 15));
+        .theSprintIsCreated();
   }
 
   @Test
@@ -52,7 +48,6 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .theSprintIsCreated(
-            UUID.fromString("374f7929-bd6b-4178-88f2-c273aa48134c"), "Sprint no dates", null, null);
+        .theSprintIsCreated();
   }
 }

@@ -21,6 +21,5 @@ public interface SprintDsl {
 
   SprintDsl then();
 
-  SprintDsl theSprintIsCreated(
-      UUID productId, String sprintName, LocalDate startDate, LocalDate endDate);
+  SprintDsl theSprintIsCreated();
 }
