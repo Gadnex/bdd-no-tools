@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import bdd.feature.sprint.SprintDsl;
+import io.qameta.allure.Step;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -38,40 +39,47 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
+  @Step("Given")
   public SprintDsl given() {
     return this;
   }
 
   @Override
+  @Step("product with ID {productId}")
   public SprintDsl productWithId(UUID productId) {
     this.productId = productId;
     return this;
   }
 
   @Override
+  @Step("sprint name {sprintName}")
   public SprintDsl sprintName(String sprintName) {
     this.sprintName = sprintName;
     return this;
   }
 
   @Override
+  @Step("start date {startDate}")
   public SprintDsl startDate(LocalDate startDate) {
     this.startDate = startDate;
     return this;
   }
 
   @Override
+  @Step("end date {endDate}")
   public SprintDsl endDate(LocalDate endDate) {
     this.endDate = endDate;
     return this;
   }
 
   @Override
+  @Step("when")
   public SprintDsl when() {
     return this;
   }
 
   @Override
+  @Step("I create the sprint ")
   public SprintDsl iCreateTheSprint() {
     CreateSprintCommand createSprintCommand =
         new CreateSprintCommand(productId, sprintName, startDate, endDate);
@@ -86,11 +94,13 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
+  @Step("then")
   public SprintDsl then() {
     return this;
   }
 
   @Override
+  @Step("the sprint is created")
   public SprintDsl theSprintIsCreated() {
     // Verify sprintCreatedEvent
     assertNotNull(sprintCreatedEvent);
@@ -111,6 +121,7 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
+  @Step("invalid product ID")
   public SprintDsl invalidProductId() {
     assertNotNull(constraintViolations);
     assertEquals(1, constraintViolations.size());
@@ -119,6 +130,7 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
+  @Step("invalid sprint name")
   public SprintDsl invalidSprintName() {
     assertNotNull(constraintViolations);
     assertEquals(1, constraintViolations.size());

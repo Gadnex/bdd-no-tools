@@ -1,21 +1,19 @@
 package bdd.feature.sprint;
 
 import bdd.driver.sprint.SprintDriver;
+import io.qameta.allure.Story;
 import java.time.LocalDate;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-/**
- * Feature: Create a sprint
- *
- * <p>As a scrum master I want to create a sprint so that my team can plan the work for the next
- * sprint.
- */
-@ExtendWith(SpringExtension.class)
+@Story(
+    """
+    As a scrum master
+    I want to create a sprint
+    so that my team can plan the work for the next sprint.
+    """)
 @DisplayName("Create a sprint")
 class CreateSprintTest {
 
