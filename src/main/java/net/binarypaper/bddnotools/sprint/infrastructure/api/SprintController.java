@@ -26,10 +26,10 @@ class SprintController {
       summary = "Create new sprint",
       description =
           """
-                    <b>As a</b> scrum master<br>
-                    <b>I want to</b> create a new sprint<br>
-                    <b>so that</b> my team can work on the sprint.
-                    """)
+            <b>As a</b> scrum master<br>
+            <b>I want to</b> create a new sprint<br>
+            <b>so that</b> my team can work on the sprint.
+          """)
   @ApiResponses({
     @ApiResponse(responseCode = "200", description = "Sprint created"),
     @ApiResponse(responseCode = "400", description = "Invalid sprint details", content = @Content)
