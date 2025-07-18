@@ -12,9 +12,7 @@ import net.binarypaper.bddnotools.sprint.domain.Sprint;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class SprintEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id;
+  @Id private UUID id;
 
   private UUID productId;
 
@@ -34,7 +32,11 @@ class SprintEntity {
 
   public Sprint toSprint() {
     Sprint sprint = new Sprint();
-
+    sprint.setId(id);
+    sprint.setProductId(productId);
+    sprint.setName(name);
+    sprint.setStartDate(startDate);
+    sprint.setEndDate(endDate);
     return sprint;
   }
 }

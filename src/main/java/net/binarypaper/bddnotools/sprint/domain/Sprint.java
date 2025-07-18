@@ -3,12 +3,12 @@ package net.binarypaper.bddnotools.sprint.domain;
 import java.time.LocalDate;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.binarypaper.bddnotools.sprint.CreateSprintCommand;
 import net.binarypaper.bddnotools.sprint.SprintCreatedEvent;
 
-@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sprint {
