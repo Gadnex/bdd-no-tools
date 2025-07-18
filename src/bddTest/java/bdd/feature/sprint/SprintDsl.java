@@ -22,4 +22,6 @@ public interface SprintDsl {
   SprintDsl then();
 
   SprintDsl theSprintIsCreated();
+
+  SprintDsl errorCreatingSprint(String message);
 }

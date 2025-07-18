@@ -1,5 +1,6 @@
 package net.binarypaper.bddnotools.sprint;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import net.binarypaper.bddnotools.sprint.domain.Sprint;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class SprintService {
     this.sprintRepository = sprintRepository;
   }
 
-  public SprintCreatedEvent createSprint(CreateSprintCommand command) {
+  public SprintCreatedEvent createSprint(@Valid CreateSprintCommand command) {
     Sprint sprint = new Sprint();
     SprintCreatedEvent sprintCreatedEvent = sprint.createSprint(command);
     sprintRepository.save(sprint);

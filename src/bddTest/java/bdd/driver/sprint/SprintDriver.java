@@ -4,7 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import bdd.feature.sprint.SprintDsl;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
 import java.time.LocalDate;
+import java.util.Set;
 import java.util.UUID;
 import net.binarypaper.bddnotools.sprint.CreateSprintCommand;
 import net.binarypaper.bddnotools.sprint.SprintCreatedEvent;
@@ -17,6 +21,7 @@ public class SprintDriver implements SprintDsl {
 
   private final SprintRepository sprintRepository;
   private final SprintService sprintService;
+  private final Validator validator;
 
   private UUID productId;
   private String sprintName;
@@ -24,10 +29,12 @@ public class SprintDriver implements SprintDsl {
   private LocalDate endDate;
 
   private SprintCreatedEvent sprintCreatedEvent;
+  private Set<ConstraintViolation<CreateSprintCommand>> constraintViolations;
 
   public SprintDriver() {
     sprintRepository = Mockito.mock(SprintRepository.class);
     sprintService = new SprintService(sprintRepository);
+    validator = Validation.buildDefaultValidatorFactory().getValidator();
   }
 
   @Override
@@ -68,10 +75,13 @@ public class SprintDriver implements SprintDsl {
   public SprintDsl iCreateTheSprint() {
     CreateSprintCommand createSprintCommand =
         new CreateSprintCommand(productId, sprintName, startDate, endDate);
-    sprintCreatedEvent = sprintService.createSprint(createSprintCommand);
-    Sprint sprint = new Sprint();
-    sprint.applyEvent(sprintCreatedEvent);
-    Mockito.when(sprintRepository.findById(sprintCreatedEvent.id())).thenReturn(sprint);
+    constraintViolations = validator.validate(createSprintCommand);
+    if (constraintViolations.isEmpty()) {
+      sprintCreatedEvent = sprintService.createSprint(createSprintCommand);
+      Sprint sprint = new Sprint();
+      sprint.applyEvent(sprintCreatedEvent);
+      Mockito.when(sprintRepository.findById(sprintCreatedEvent.id())).thenReturn(sprint);
+    }
     return this;
   }
 
@@ -97,6 +107,14 @@ public class SprintDriver implements SprintDsl {
     assertEquals(sprintName, sprint.getName());
     assertEquals(startDate, sprintCreatedEvent.startDate());
     assertEquals(endDate, sprintCreatedEvent.endDate());
+    return this;
+  }
+
+  @Override
+  public SprintDsl errorCreatingSprint(String message) {
+    assertNotNull(constraintViolations);
+    assertEquals(1, constraintViolations.size());
+    assertEquals(message, constraintViolations.iterator().next().getMessage());
     return this;
   }
 }
