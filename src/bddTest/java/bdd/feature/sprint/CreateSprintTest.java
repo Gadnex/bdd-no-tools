@@ -63,7 +63,7 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .errorCreatingSprint("must not be null");
+        .invalidProductId();
   }
 
   @Test
@@ -75,12 +75,12 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .errorCreatingSprint("must not be null");
+        .invalidSprintName();
   }
 
   @Test
-  @DisplayName("with name too short")
-  void createSprintWithNameTooShort() {
+  @DisplayName("with name less than 3 characters long")
+  void createSprintWithNameLessThan3CharsLong() {
     scrumMaster
         .given()
         .productWithId(UUID.fromString("374f7929-bd6b-4178-88f2-c273aa48134c"))
@@ -88,12 +88,12 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .errorCreatingSprint("size must be between 3 and 100");
+        .invalidSprintName();
   }
 
   @Test
-  @DisplayName("with name too long")
-  void createSprintWithNameTooLong() {
+  @DisplayName("with name more than 100 characters long")
+  void createSprintWithNameMoreThan100CharsLong() {
     scrumMaster
         .given()
         .productWithId(UUID.fromString("374f7929-bd6b-4178-88f2-c273aa48134c"))
@@ -102,6 +102,6 @@ class CreateSprintTest {
         .when()
         .iCreateTheSprint()
         .then()
-        .errorCreatingSprint("size must be between 3 and 100");
+        .invalidSprintName();
   }
 }

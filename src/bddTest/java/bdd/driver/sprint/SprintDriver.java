@@ -111,10 +111,18 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
-  public SprintDsl errorCreatingSprint(String message) {
+  public SprintDsl invalidProductId() {
     assertNotNull(constraintViolations);
     assertEquals(1, constraintViolations.size());
-    assertEquals(message, constraintViolations.iterator().next().getMessage());
+    assertEquals("productId", constraintViolations.iterator().next().getPropertyPath().toString());
+    return this;
+  }
+
+  @Override
+  public SprintDsl invalidSprintName() {
+    assertNotNull(constraintViolations);
+    assertEquals(1, constraintViolations.size());
+    assertEquals("name", constraintViolations.iterator().next().getPropertyPath().toString());
     return this;
   }
 }

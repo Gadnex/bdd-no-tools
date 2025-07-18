@@ -23,5 +23,7 @@ public interface SprintDsl {
 
   SprintDsl theSprintIsCreated();
 
-  SprintDsl errorCreatingSprint(String message);
+  SprintDsl invalidProductId();
+
+  SprintDsl invalidSprintName();
 }
