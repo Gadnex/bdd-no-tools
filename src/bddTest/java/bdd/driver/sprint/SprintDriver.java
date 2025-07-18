@@ -73,7 +73,7 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
-  @Step("when")
+  @Step("When")
   public SprintDsl when() {
     return this;
   }
@@ -94,7 +94,7 @@ public class SprintDriver implements SprintDsl {
   }
 
   @Override
-  @Step("then")
+  @Step("Then")
   public SprintDsl then() {
     return this;
   }
