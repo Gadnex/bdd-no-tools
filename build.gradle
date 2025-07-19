@@ -97,6 +97,12 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+allure {
+	adapter {
+		allureJavaVersion = "2.29.1"
+	}
+}
+
 tasks.register('bootRunDev') {
     group = 'application'
     description = 'Runs the Spring Boot application with the dev profile'
